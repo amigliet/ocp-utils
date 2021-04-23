@@ -32,7 +32,7 @@ function quay_extract_config_bundle_secret() {
   local QUAY_NAMESPACE="${1:-$(oc project -q)}"
   local QUAY_CURR_CONFIG_BUNDLE="$( quay_get_config_bundle_secret )"
 
-  readonly QUAY_TMPDIR="$(mktemp -d)"
+  local -r QUAY_TMPDIR="$(mktemp -d)"
   printf '%s\n' "$QUAY_TMPDIR"
 
   oc extract secret/"$QUAY_CURR_CONFIG_BUNDLE" -n "$QUAY_NAMESPACE" --to="$QUAY_TMPDIR"
