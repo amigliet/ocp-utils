@@ -9,7 +9,7 @@ function update_oc_client() {
   local OC_SHA256_URL="https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/sha256sum.txt"
 
   echo "Downloading the archive into $OC_ARCHIVE.."
-  curl --silent --show-error --output "$OC_ARCHIVE" "$OC_ARCHIVE_URL"
+  curl --progress-bar --show-error --output "$OC_ARCHIVE" "$OC_ARCHIVE_URL"
 
   local RSHA="$(curl -s $OC_SHA256_URL | awk '/openshift-client-linux/ { print $1 }')"
   local LSHA="$(sha256sum $OC_ARCHIVE | awk '{ print $1 }')"
